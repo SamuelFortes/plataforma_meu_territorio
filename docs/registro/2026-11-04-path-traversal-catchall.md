@@ -44,6 +44,11 @@ Com o build em `frontend/dist`, rodando de dentro de `backend/`:
 Antes da correção, os dois primeiros ataques devolviam o `.env` e o
 `backend/main.py`.
 
+Em produção (https://meu-territorio.onrender.com, 2026-11-09, antes do merge),
+as variações com `%2F` e `../` foram barradas com `400` pela borda do Render, que
+não é o nosso código. A correção continua necessária: não dá para depender de um
+filtro externo que pode mudar.
+
 ## Pendências
 
 - Fazer o merge do PR.

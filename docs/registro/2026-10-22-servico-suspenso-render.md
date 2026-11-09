@@ -2,7 +2,7 @@
 
 - **Data:** 2026-10-22
 - **Tipo:** incidente
-- **Status:** aberto
+- **Status:** resolvido (2026-11-09)
 - **Responsável:** Allyson Kawã
 - **PR / commits:** nenhum (problema de infraestrutura, não de código)
 
@@ -27,17 +27,26 @@ Hipóteses:
 
 ## Solução
 
-Pendente. Passos:
+Samuel Fortes resolveu no Render em 2026-11-09. A plataforma voltou em um
+**endereço novo**, acompanhando a mudança de nome do projeto:
 
-1. No painel do Render (https://dashboard.render.com), abrir o serviço e ver o
-   aviso no topo e o log de **Events** para saber quem suspendeu e quando.
-2. Conferir **Billing** (plano, cartão, faturas).
-3. Antes de reativar: corrigir o path traversal e trocar os segredos (ver
-   [2026-11-04-path-traversal-catchall.md](2026-11-04-path-traversal-catchall.md)).
-4. Clicar em **Resume Service** e conferir se o deploy pegou o último commit
-   do `master`.
+- Novo (no ar): https://meu-territorio.onrender.com
+- Antigo (continua suspenso): https://plataforma-virtual.onrender.com
+
+Quem usava o endereço antigo precisa ser avisado do novo.
+
+O motivo da suspensão do serviço antigo e se ele foi substituído de propósito
+ainda não estão registrados: perguntar ao Samuel e completar aqui.
 
 ## Como verificar
 
-`curl -I https://plataforma-virtual.onrender.com/` deve responder `200`, sem o
-header `x-render-routing: suspend-by-user`.
+Em 2026-11-09, `https://meu-territorio.onrender.com` respondeu `200` em `/`,
+`/login` e `/ping`, e `/health` devolveu
+`{"status":"ok","database":"connected"}`.
+
+## Pendências
+
+- Confirmar com o Samuel a causa da suspensão e se o serviço antigo será
+  apagado ou redirecionado.
+- Confirmar se os segredos do serviço novo foram trocados (ver
+  [2026-11-04-path-traversal-catchall.md](2026-11-04-path-traversal-catchall.md)).
