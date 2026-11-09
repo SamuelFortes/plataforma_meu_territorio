@@ -178,8 +178,15 @@ async def serve_react_app(catchall: str):
             detail=f"Rota de API não encontrada: /{catchall}",
         )
     # Serve arquivos estáticos da raiz do dist (ex: logo.jpeg, favicon.ico)
-    static_file = f"../frontend/dist/{catchall}"
-    if os.path.exists(static_file) and os.path.isfile(static_file):
+    # O caminho é resolvido e precisa ficar dentro do dist, senão "../" leria
+    # qualquer arquivo do servidor (ex: /..%2F..%2F.env).
+    dist_dir = os.path.realpath("../frontend/dist")
+    static_file = os.path.realpath(os.path.join(dist_dir, catchall))
+    try:
+        inside_dist = os.path.commonpath([dist_dir, static_file]) == dist_dir
+    except ValueError:  # drives diferentes no Windows (ex: "D:/...")
+        inside_dist = False
+    if inside_dist and os.path.isfile(static_file):
         return FileResponse(static_file)
     index_path = "../frontend/dist/index.html"
     if os.path.exists(index_path):
