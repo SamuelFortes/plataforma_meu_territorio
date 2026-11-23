@@ -165,8 +165,11 @@ async def health_check(request: Request, db: AsyncSession = Depends(get_db)):
         from sqlalchemy import text
         await db.execute(text("SELECT 1")) #Ping no banco
         return {"status": "ok", "database": "connected"}
-    except Exception as e:
-        return {"status": "error", "database": str(e)}
+    except Exception:
+        # O detalhe do erro (host, usuário, porta do banco) vai só para o log do
+        # servidor; a rota é pública e não deve expor a infraestrutura.
+        logger.exception("Health check: falha ao conectar no banco de dados")
+        return {"status": "error", "database": "unavailable"}
 
 # Rota catch-all para servir o index.html do React para qualquer outra rota.
 # IMPORTANTE: rotas /api/ nunca devem retornar HTML — retorna 404 JSON.

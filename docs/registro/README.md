@@ -20,6 +20,8 @@ Status possíveis: `aberto`, `em andamento`, `resolvido`, `descartado`.
 
 | Data | Tipo | Assunto | Status |
 |---|---|---|---|
+| 2026-11-23 | segurança | [Rota pública /health expunha detalhes do banco de dados](2026-11-23-health-expoe-erro-banco.md) | em andamento |
+| 2026-11-23 | incidente | [Banco de dados (Supabase) fora do ar: login e telas com dados dão erro 500](2026-11-23-banco-supabase-fora.md) | aberto |
 | 2026-11-04 | segurança | [Path traversal na rota catch-all expõe arquivos do servidor](2026-11-04-path-traversal-catchall.md) | em andamento |
 | 2026-10-22 | incidente | [Serviço suspenso no Render](2026-10-22-servico-suspenso-render.md) | resolvido |
 
